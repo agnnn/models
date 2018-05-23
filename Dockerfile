@@ -1,5 +1,5 @@
 # Python base image
-FROM python:2-slim
+FROM python:3.6.3
 
 WORKDIR /usr/src/app
 COPY requirements.txt ./

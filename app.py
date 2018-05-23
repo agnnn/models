@@ -2,7 +2,7 @@
 from google.cloud import storage
 import os
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
+os.environ["credentials"]
 # Instantiates a client
 storage_client = storage.Client()
 

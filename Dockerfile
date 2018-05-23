@@ -1,13 +1,13 @@
 # Python base image
-FROM python:3.6.3
+FROM python:2-slim
 
-RUN mkdir /models
-COPY . /models
-WORKDIR /models/
-RUN pip install -r ./requirements.txt
+WORKDIR /usr/src/app
+COPY requirements.txt ./
+COPY app.py ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 # ENTRYPOINT /bin/bash
 EXPOSE 80
 
 # Launch server app
-ENTRYPOINT python ./app.py
+CMD [ "python", "./app.py" ]

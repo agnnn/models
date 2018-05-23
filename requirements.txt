@@ -1,1 +1,10 @@
+numpy
+pandas
+python-dateutil
+pytz
+scikit-learn
+scipy
+six
+sklearn
 google-cloud
+Flask

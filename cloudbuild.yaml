@@ -18,4 +18,7 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=model-spike'
+- id: Switch LB service to new model
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['patch','service','demo','-p',''{"spec":{"selector":{"version":$SHORT_SHA}}}'']
 images: ['gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA']

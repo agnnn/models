@@ -14,16 +14,15 @@ steps:
   args: ['bash','-c','sed -i "s,BUILD_VERSION,$SHORT_SHA," *.yaml']
 - id: Deploy model to Kubernetes Cluster
   name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'model.yaml']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=model-spike'
+- name: 'gcr.io/cloud-builders/kubectl'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
-    echo "Deploying new Pods"
-    kubectl apply -f model.yaml
-    sleep 250s
     echo "Patching LoadBalancer endpoint to new pods."
     kubectl patch service demo -p '{"spec":{"selector":{"version":"$SHORT_SHA"}}}'
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=model-spike'
 images: ['gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA']

@@ -7,7 +7,7 @@ COPY app.py ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # ENTRYPOINT /bin/bash
-EXPOSE 80
+EXPOSE 5000
 
 # Launch server app
 ENTRYPOINT python ./app.py

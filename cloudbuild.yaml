@@ -9,10 +9,16 @@ steps:
 - id: 'Set new docker image variable in kubernetes deployment yaml file'
   name: 'ubuntu'
   args: ['bash','-c','sed -i "s,MODEL_IMAGE_NAME,gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA," *.yaml']
-- id: kubectl-apply
+- id: 'Set Latest Image version in kubernetes deployment yaml file'
+  name: 'ubuntu'
+  args: ['bash','-c','sed -i "s,BUILD_VERSION,$SHORT_SHA," *.yaml']
+- id: Deploy model to Kubernetes Cluster
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'model.yaml']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=model-spike'
+- id: Switch LB service to new model
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['patch','service','demo','-p',''{"spec":{"selector":{"version":$SHORT_SHA}}}'']
 images: ['gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA']

@@ -10,4 +10,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 80
 
 # Launch server app
-CMD [ "python", "./app.py" ]
+ENTRYPOINT python ./app.py

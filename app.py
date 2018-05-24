@@ -1,15 +1,16 @@
-# Imports the Google Cloud client library
-from google.cloud import storage
-import os
+from flask import Flask
+from flask_restful import Resource, Api
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
-# Instantiates a client
-storage_client = storage.Client()
+app = Flask(__name__)
+api = Api(app)
 
-# The name for the new bucket
-bucket_name = 'spikemodelv2teset'
 
-# Creates the new bucket
-bucket = storage_client.create_bucket(bucket_name)
+class HelloWorld(Resource):
+    def get(self):
+        return {'hello': 'world'}
 
-print('Bucket {} created.'.format(bucket.name))
+
+api.add_resource(HelloWorld, '/')
+
+if __name__ == '__main__':
+    app.run(debug=True, port=80)

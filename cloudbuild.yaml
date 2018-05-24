@@ -18,12 +18,4 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=model-spike'
-- name: 'gcr.io/cloud-builders/kubectl'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    sleep 120s
-    echo "Patching LoadBalancer endpoint to new pods."
-    kubectl patch service demo -p '{"spec":{"selector":{"version":"$SHORT_SHA"}}}'
 images: ['gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA']

@@ -20,14 +20,5 @@ steps:
   - 'CLOUDSDK_CONTAINER_CLUSTER=model-spike'
 - id: Switch LB service to new model
   name: 'gcr.io/cloud-builders/kubectl'
-  entrypoint: 'sh'
-  args:
-    - '-c'
-    - |
-      cat <<EOF > patch.yaml
-      spec:
-        selector:
-          version: $SHORT_SHA
-      EOF
-      kubectl patch service demo -p patch.yaml
+  args: ['patch','service','demo','-p',' '{"spec":{"selector":{"version":$SHORT_SHA}}}' ']
 images: ['gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA']

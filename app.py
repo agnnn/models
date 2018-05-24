@@ -7,7 +7,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
 storage_client = storage.Client()
 
 # The name for the new bucket
-bucket_name = 'testspikeformodel'
+bucket_name = 'spikemodelv2test'
 
 # Creates the new bucket
 bucket = storage_client.create_bucket(bucket_name)

@@ -7,7 +7,7 @@ metadata:
   labels:
     app: "demo"
 spec:
-  replicas: 1 # tells deployment to run 1 pods matching the template
+  replicas: "1" # tells deployment to run 1 pods matching the template
   selector:
     matchLabels:
       app: "demo"
@@ -32,7 +32,7 @@ spec:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /tmp/credentials/sa.json
 ---
-apiVersion: v1
+apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "demo"
@@ -44,8 +44,8 @@ spec:
   sessionAffinity: "None"
   externalTrafficPolicy: "Cluster"
   ports:
-  - port: 80
-    targetPort: 80
+  - port: "80"
+    targetPort: "80"
     protocol: "TCP"
   selector:
     app: "demo"

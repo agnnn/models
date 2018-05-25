@@ -49,6 +49,5 @@ spec:
     protocol: "TCP"
   selector:
     app: "demo"
-    version: BUILD_VERSION
 status:
   loadBalancer: {}

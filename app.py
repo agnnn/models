@@ -6,7 +6,7 @@ import traceback
 from flask import Flask, request, jsonify
 import pandas as pd
 from sklearn.externals import joblib
-from gcstorage import upload_model, delete_model, get_model, load_model
+from gcstorage import upload_model, delete_model, get_model, load_model, check_modle
 
 
 model_directory = 'model'
@@ -133,7 +133,10 @@ if __name__ == '__main__':
         port = int(sys.argv[1])
     except Exception as e:
         port = 80
-    print("Loading model")
+    print("Checking if model is valid")
+    check_modle(os.getenv("GCS_MODEL_BUCKET", default='generic-model'),
+                os.getenv("MODEL_NAME", default='model.pkl'))
+    print("Loading model to fs")
     clf = load_model(os.getenv("GCS_MODEL_BUCKET", default='generic-model'),
                      os.getenv("MODEL_NAME", default='model.pkl'))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=False)

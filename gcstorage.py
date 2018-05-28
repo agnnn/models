@@ -1,4 +1,3 @@
-import pickle
 import os
 import glob
 from google.cloud import storage
@@ -11,12 +10,23 @@ def get_model(bucket_name):
     """Lists all the blobs in the bucket."""
     storage_client = storage.Client()
     bucket = storage_client.get_bucket(bucket_name)
-
+    models = []
     blobs = (bucket.list_blobs())
 
     for blob in blobs:
-        print(blob.name)
-    return blobs
+        models.append(blob.name)
+    return models
+
+
+def check_modle(bucket_name, model_name):
+    """Check if its a valid model avialable in GCS bucket"""
+    models = get_model(bucket_name)
+    if (model_name in models):
+        print('{} is a valid model in GCS bucket'.format(model_name))
+        return
+    else:
+        raise SystemExit("Unexpected model {}! Add {} to GCS bucket and try again.".format(
+            model_name, model_name))
 
 
 def load_model(bucket_name, source_model_name):

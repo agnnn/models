@@ -7,7 +7,12 @@ metadata:
   labels:
     app: "demo"
 spec:
-  restartPolicy: Never
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   replicas: 2 # tells deployment to run 2 pods matching the template
   selector:
     matchLabels:
@@ -36,6 +41,8 @@ spec:
           value: model.pkl
         - name: GCS_MODEL_BUCKET
           value: generic-model
+       restartPolicy: Onfailure
+status: {}
 ---
 apiVersion: v1
 kind: "Service"

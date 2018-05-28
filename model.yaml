@@ -21,6 +21,7 @@ spec:
       - name: google-cloud-key
         secret:
           secretName: credentials
+      restartPolicy: OnFailure
       containers:
       - name: "github-agnnn-models"
         image: MODEL_IMAGE_NAME
@@ -28,7 +29,6 @@ spec:
         - name: google-cloud-key
           mountPath: "/tmp/credentials"
           readOnly: true
-      restartPolicy: OnFailure
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /tmp/credentials/sa.json

@@ -7,7 +7,7 @@ metadata:
   labels:
     app: "demo"
 spec:
-  replicas: 2 # tells deployment to run 1 pods matching the template
+  replicas: 2 # tells deployment to run 2 pods matching the template
   selector:
     matchLabels:
       app: "demo"
@@ -28,6 +28,7 @@ spec:
         - name: google-cloud-key
           mountPath: "/tmp/credentials"
           readOnly: true
+      restartPolicy: OnFailure
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /tmp/credentials/sa.json

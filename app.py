@@ -132,7 +132,7 @@ if __name__ == '__main__':
     try:
         port = int(sys.argv[1])
     except Exception as e:
-        port = 80
+        port = 5000
     print("Checking if model is valid")
     check_modle(os.getenv("GCS_MODEL_BUCKET", default='generic-model'),
                 os.getenv("MODEL_NAME", default='model.pkl'))

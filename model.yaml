@@ -32,7 +32,7 @@ spec:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /tmp/credentials/sa.json
         - name: MODEL_NAME
-          value: model2.pkl
+          value: model.pkl
         - name: GCS_MODEL_BUCKET
           value: generic-model
 ---

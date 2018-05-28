@@ -8,12 +8,6 @@ metadata:
     app: "demo"
 spec:
   replicas: 2 # tells deployment to run 1 pods matching the template
-  targetCPUUtilizationPercentage: 80
-  statergy:
-  type: RollingUpdate
-  rollingUpdate:
-    maxSurge: 2
-    maxUnavilable: 0
   selector:
     matchLabels:
       app: "demo"

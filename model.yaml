@@ -41,7 +41,6 @@ spec:
           value: model.pkl
         - name: GCS_MODEL_BUCKET
           value: generic-model
-       restartPolicy: Onfailure
 status: {}
 ---
 apiVersion: v1

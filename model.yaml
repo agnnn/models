@@ -31,6 +31,10 @@ spec:
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /tmp/credentials/sa.json
+        - name: MODEL_NAME
+          value: model2.pkl
+        - name: GCS_MODEL_BUCKET
+          value: generic-model
 ---
 apiVersion: v1
 kind: "Service"

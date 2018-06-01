@@ -29,7 +29,7 @@ spec:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /tmp/credentials/sa.json
         - name: MODEL_NAME #Change this
-          value: model.pkl
+          value: model2.pkl
         - name: GCS_MODEL_BUCKET #Change this
           value: generic-model
         image: MODEL_IMAGE_NAME
